@@ -6,6 +6,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Container = styled.div`
     height: 60px;
+    border-bottom: 1px solid black;
 `;
 const Wrapper = styled.div`
     padding: 10px 20px;
@@ -26,6 +27,7 @@ const Language = styled.span`
 const Center = styled.div`
     flex: 1;
     text-align: center;
+    padding: ;
 `;
 
 const Right = styled.div`
@@ -37,8 +39,7 @@ const Right = styled.div`
 const MeanuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
-    margin-left:25px
-
+    margin-left: 25px;
 `;
 const SearchContainer = styled.div`
     border: 0.5px solid lightgray;
@@ -62,7 +63,7 @@ const Navbar = () => {
                     <Language>En</Language>
                     <SearchContainer>
                         <Input />
-                        <SearchIcon style={{color:"gray",fontSize:18}} />
+                        <SearchIcon style={{ color: "gray", fontSize: 18 }} />
                     </SearchContainer>
                 </Left>
                 <Center>
