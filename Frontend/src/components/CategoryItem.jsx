@@ -14,6 +14,8 @@ const Image = styled.img`
 const Title = styled.h1`
 color:white;
 margin:20px;
+font-family:monospace;
+font-size:40px;
 `;
 const Info = styled.div`
 position:absolute;
