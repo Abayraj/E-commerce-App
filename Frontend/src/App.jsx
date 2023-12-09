@@ -3,6 +3,8 @@ import './App.css'
 import Home from './pages/Home'
 import ProductList from './pages/ProductList'
 import Product from './pages/Product'
+import Register from './pages/Register'
+import Login from './pages/Login'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +13,9 @@ function App() {
     <>
         {/* <Home/> */}
         {/* <ProductList/> */}
-        <Product/>
+        {/* <Product/> */}
+        {/* <Register/> */}
+        <Login/>
        
         
     </>
