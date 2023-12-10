@@ -3,16 +3,20 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import {mobile} from "../responsive"
 
 const Container = styled.div`
     height: 60px;
     border-bottom: 1px solid black;
+    ${mobile({height:"50px"})}
+   
 `;
 const Wrapper = styled.div`
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    ${mobile({height:"50px"})}
 `;
 const Left = styled.div`
     flex: 1;
@@ -50,6 +54,8 @@ const SearchContainer = styled.div`
 `;
 const Input = styled.input`
     border: none;
+    outline:none;
+
 `;
 const Logo = styled.h1`
     font-weight: bold;
