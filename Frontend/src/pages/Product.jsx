@@ -5,11 +5,13 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
     padding: 50px;
     display: flex;
+    ${mobile({ padding:"10px", flexDirection:"column" })}
 `;
 const ImgContainer = styled.div`
     flex: 1;
@@ -18,11 +20,13 @@ const Image = styled.img`
     width: 500px;
     height: 600px;
     object-fit: cover;
+    ${mobile({ width:"45vh"})}
 `;
 const Title = styled.h1`
 `;
 const InfoContainer = styled.div`
     flex: 1;
+    ${mobile({padding:"10px" })}
 `;
 const Description = styled.p`
     margin: 20px 0px;
@@ -40,6 +44,8 @@ const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    ${mobile({ width:"100%" })}
+
 `;
 const Filter = styled.div`
     display: flex;
@@ -68,6 +74,7 @@ const AddContainter = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    ${mobile({ width:"100%" })}
 `;
 
 const AmountContainer = styled.div`
@@ -117,7 +124,7 @@ const Product = () => {
                         or cinched waist and a top portion resembling a shirt or
                         a top with sleeves.
                     </Description>
-                    <Price>$200</Price>
+                    <Price>$30</Price>
                     <FilterContainer>
                         <Filter>
                             <FilterTitle>color</FilterTitle>

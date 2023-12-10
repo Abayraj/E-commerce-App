@@ -4,11 +4,13 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
     padding: 20px;
+    ${mobile({ padding:"10px" })}
 `;
 
 const Title = styled.h1`
@@ -21,6 +23,7 @@ const Top = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    ${mobile({ gap:"10px" })}
 `;
 
 const TopButton = styled.button`
@@ -32,7 +35,9 @@ const TopButton = styled.button`
         props.type === "filled" ? "black" : "transparent"};
     color: ${(props) => props.type === "filled" && "white"};
 `;
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+${mobile({ display:"none" })}
+`;
 
 const TopText = styled.span`
     text-decoration: underline;
@@ -42,14 +47,18 @@ const TopText = styled.span`
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({ flexDirection:"column",  justifyContent: "space-between" })}
 `;
 const Info = styled.div`
     flex: 3;
+    
 `;
 
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({ flexDirection:"column" })}
+  
 `;
 
 const ProductId = styled.span``;
@@ -84,11 +93,13 @@ const ProductSize = styled.div``;
 
 const PriceDetail = styled.div`
     flex: 1;
+    ${mobile({ display:"flex", flexDirection:"column",alignItems:"center" })}
 `;
 const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    
 `;
 const ProductAmount = styled.div`
     font-size: 24px;
@@ -136,6 +147,8 @@ const Summary = styled.div`
     border-radius: 10px;
     padding: 20px;
     height: 50vh;
+    ${mobile({ marginTop:"10px" })}
+    
 `;
 
 const Cart = () => {

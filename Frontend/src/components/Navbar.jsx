@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${mobile({height:"50px"})}
+    ${mobile({padding:"10px 0px"})}
 `;
 const Left = styled.div`
     flex: 1;
@@ -26,6 +26,7 @@ const Left = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+    ${mobile({display:"none"})}
 `;
 
 const Center = styled.div`
@@ -38,12 +39,14 @@ const Right = styled.div`
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    ${mobile({justifyContent:"center",flex:2})}
 `;
 
 const MeanuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
+    ${mobile({fontSize:"12px",marginLeft:"10px",marginTop:"10px" })}
 `;
 const SearchContainer = styled.div`
     border: 0.5px solid lightgray;
@@ -55,10 +58,12 @@ const SearchContainer = styled.div`
 const Input = styled.input`
     border: none;
     outline:none;
+    ${mobile({width:"50px"})}
 
 `;
 const Logo = styled.h1`
     font-weight: bold;
+    ${mobile({fontSize:"24px"})}
 `;
 
 const Navbar = () => {
@@ -68,7 +73,7 @@ const Navbar = () => {
                 <Left>
                     <Language>En</Language>
                     <SearchContainer>
-                        <Input />
+                        <Input placeholder="search" />
                         <SearchIcon style={{ color: "gray", fontSize: 18 }} />
                     </SearchContainer>
                 </Left>

@@ -6,12 +6,14 @@ import PinterestIcon from "@mui/icons-material/Pinterest";
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
+import { mobile } from "../responsive";
 
 const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-Top:1px solid black;
+    ${mobile({flexDirection:"column"})}
 `;
 const Left = styled.div`
     flex: 1;
@@ -50,6 +52,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({display:"none"})}
 `;
 const Title = styled.h3`
     font-size: 25px;
@@ -70,6 +73,7 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({backgroundColor:"#eee"})}
 `;
 
 const ContactItem = styled.div`
