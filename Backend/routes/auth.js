@@ -1,25 +1,61 @@
-const router =  require("express").Router();
+const router = require("express").Router();
 const User = require("../Models/User");
+const {
+    generatePasswordHash,
 
-//Register router 
+    comparePasswordHash,
 
-router.post("/register", async(req,res)=>{
+} = require("../utils/bcrypt");
 
-    //model object
-    const newUser = new User({
-        username:req.body.username,
-        email:req.body.email,
-        password:req.body.password,
-    });
 
+
+
+//Register router sign up
+
+router.post("/register", async (req, res) => {
+    const { username,password,email } = req.body;
+    console.log(username,password,email)
     try {
-        const savedUser = await  newUser.save();
-        res.status(201).json(
-            savedUser
-        )
-    } catch (err) {
-     res.status(500).json(err);
+        const isExist = await User.findOne({ username });
+        if (isExist) {
+          return res.status(400).json({
+            message: "User Already Exist",
+          });
+        }
+
+        const hashedPassword = await generatePasswordHash(password);
+
+        console.log(hashedPassword, "hashed password")
+
+        await User.create({
+            username,
+            email,
+            password:hashedPassword,
+        });
+
+        res.json({
+            message: "Account has been Created",
+          });
+    }
+    catch (err) {
+        res.status(500).json(err);
     }
 });
+
+//Login user
+
+router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        const validPassword = await comparePasswordHash(password, user.password);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+
+})
+
+
 
 module.exports = router;
