@@ -72,11 +72,19 @@ router.get("/",async (req,res)=>{
     try{
         let products;
         if(queryNew){
-            products  = await Product.find().sort({createdAt:-1})
+            products  = await Product.find().sort({createdAt:-1}).limit(1);
+        }
+        else if(queryCategory){
+            products = await Product.find({categories:{
+                $in:[queryCategory],
+            }});
+        }
+        else{
+            products = await Product.find();
         }
 
-       const users = query ? await User.find().sort({_id: -1}).limit(1): await User.find();
-        res.status(200).json(users)  
+        res.status(200).json(products);
+
 
     }
     catch(err){
@@ -85,38 +93,6 @@ router.get("/",async (req,res)=>{
 });
 
 
-// //GET USER STATS
-
-// router.get("/stats",verifyTokenAndAdmin,async(req,res)=>{
-//     const date  = new Date();
-//     const lastYear = new Date(date.setFullYear(date.getFullYear() -1));
-//     console.log(lastYear)
-
-//     try{
-
-//         const data = await  User.aggregate([
-//             {$match:{createdAt:{$gte:lastYear}}},
-//             {
-//                 $project:{
-//                     month:{$month:"$createdAt"},
-//                 },
-//             },
-//             {
-//                 $group:{
-//                     _id:"$month",
-//                     total:{$sum:1},
-//                 },
-//             },
-//         ]);
-//         res.status(200).json(data)
-
-//         // console.log(data,"data")
-
-//     }
-//     catch(err){
-//         res.status(500).json(err)
-//     }
-// })
 
 
 

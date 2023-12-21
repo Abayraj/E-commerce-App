@@ -32,7 +32,6 @@ const  verifyTokenAndAuthorization = (req,res,next)=>{
 
 const  verifyTokenAndAdmin = (req,res,next)=>{
     verifyToken(req,res,next,()=>{
-       
         if(req.user.isAdmin){
             next()
         }else{
