@@ -9,7 +9,7 @@ const OrderSchema = new mongoose.Schema(
         products: [
             {
                 productId: {
-                    type: string,
+                    type:String,
                 },
                 quantity: {
                     type: Number,
@@ -24,7 +24,7 @@ const OrderSchema = new mongoose.Schema(
         address:{
             type:Object,
             required:true,
-            status:{type:string,default:"pending"},
+            status:{type:String,default:"pending"},
         }
     },
     {

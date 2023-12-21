@@ -10,7 +10,6 @@ const Cart = require("../Models/Cart");
 
 router.post("/",verifyToken,async (req,res)=>{
     const newCart = new Cart(req.body)
-
     try{
 
         const savedCart = await newCart.save();
@@ -74,3 +73,6 @@ router.get("/",verifyTokenAndAdmin,async(req,res)=>{
         res.status(500).json(err);
     }
 });
+
+
+module.exports = router;
