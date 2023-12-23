@@ -24,16 +24,19 @@ export const sliderItems = [
       id: 1,
       imageUrl:'../public/pexels-koolshooters-6976001.jpg',
       title: 'LIGHT SHIRT',
+      categories:"formal shirt"
     },
     {
       id: 2,
       imageUrl:'../public/pexels-ira-dulger-1452128.jpg',
       title: 'FORMAL SHIRT',
+      categories:"shirt"
     },
     {
       id: 3,
       imageUrl:'../public/pexels-godisable-jacob-794062.jpg',
       title: 'CASUAL PANTS',
+      categories:"pants"
     },
 
   ];
