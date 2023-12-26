@@ -20,13 +20,13 @@ export const sliderItems = [
   ];
 
  export const categories = [
-    {
-      id: 1,
-      imageUrl:'../public/pexels-koolshooters-6976001.jpg',
-      title: 'LIGHT SHIRT',
-      categories:"formal shirt"
-    },
-    {
+  {
+    id: 1,
+    imageUrl:'../public/pexels-koolshooters-6976001.jpg',
+    title: 'FORMAL SHIRT',
+    categories:"shirt"
+  },
+  {
       id: 2,
       imageUrl:'../public/pexels-ira-dulger-1452128.jpg',
       title: 'FORMAL SHIRT',
@@ -35,9 +35,16 @@ export const sliderItems = [
     {
       id: 3,
       imageUrl:'../public/pexels-godisable-jacob-794062.jpg',
-      title: 'CASUAL PANTS',
-      categories:"pants"
+      title: 'WOMEN DRESS',
+      categories:"women"
     },
+    {
+      id: 4,
+      imageUrl:'https://images.pexels.com/photos/5893864/pexels-photo-5893864.jpeg',
+      title: 'KIDS',
+      categories:"kids"
+    },
+
 
   ];
   

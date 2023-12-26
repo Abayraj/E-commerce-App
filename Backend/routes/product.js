@@ -59,16 +59,19 @@ router.get("/find/:id",async (req,res)=>{
         res.status(200).json(product)  
 
     }
-    catch(err){
+    catch(err){ 
         res.status(500).json(err)
     }
 });
 
 // //GET ALL PRODUCTS
 router.get("/",async (req,res)=>{
+    console.log("reached here")
     const queryNew = req.query.new;
     const queryCategory = req.query.category;
+    console.log(queryCategory,"qq")
 
+    console.log(queryCategory,"categories");
     try{
         let products;
         if(queryNew){
