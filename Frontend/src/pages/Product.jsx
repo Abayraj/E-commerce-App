@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -105,16 +107,37 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    
+    const [product,setProduct] = useState({});
+    useEffect(()=>{
+        const getProduct = async () =>{
+            try{
+                const res = await axiosInstance.get("/products/find"+id);
+                setProduct(res.data);
+        
+            }
+            catch(err){
+                
+            };
+          
+        }
+        getProduct();
+        
+      
+    },[id])
+    console.log(product,"data")
     return (
         <Container>
             <Navbar />
             <Announcement />
             <Wrapper>
                 <ImgContainer>
-                    <Image src={"../public/pexels-koolshooters-6976001.jpg"} />
+                    <Image src={product.img} />
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>Denim jumpsuit</Title>
+                    <Title>{product.title}</Title>
                     <Description>
                         A denim jumpsuit is a stylish and versatile one-piece
                         garment typically made from denim fabric, which is a

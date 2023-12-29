@@ -1,6 +1,6 @@
-const router =  require("express").Router();
+const router = require("express").Router();
 
-const {verifyToken , verifyTokenAndAuthorization,verifyTokenAndAdmin} = require("./verifyToken");
+const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 const { generatePasswordHash, comparePasswordHash, } = require("../utils/bcrypt");
 const Product = require("../Models/Product");
 
@@ -8,81 +8,84 @@ const Product = require("../Models/Product");
 
 //CREATE
 
-router.post("/",verifyTokenAndAdmin,async (req,res)=>{
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
     console.log(req.body)
     const newProduct = new Product(req.body)
 
-    try{
+    try {
 
         const savedProduct = await newProduct.save();
         res.status(200).json(savedProduct);
     }
-    catch(err){
+    catch (err) {
         res.status(500).json(err)
     }
 })
 
 
 //UPDATE
-router.put("/:id",verifyTokenAndAdmin, async(req,res)=>{
-    try{
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id,{
-            $set:req.body
-        },{new:true}
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+        }, { new: true }
         );
         res.status(200).json(updatedProduct);
     }
-    catch(err){
+    catch (err) {
         res.status(500).json(err);
 
     }
 });
 
+// //GET PRODUCT
+
+router.get("/find/:id", async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        res.status(200).json(product)
+
+    }
+    catch (err) {
+        res.status(500).json(err)
+    }
+});
+
 // //DELETE
 
-router.delete("/:id",verifyTokenAndAdmin,async (req,res)=>{
-    try{
-        await Product .findByIdAndDelete(req.params.id)
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        await Product.findByIdAndDelete(req.params.id)
         res.status(200).json("product has been deleted...")
 
     }
-    catch(err){
+    catch (err) {
         res.status(500).json(err)
     }
 });
 
-// //GET PRODUCT
-
-router.get("/find/:id",async (req,res)=>{
-    try{
-       const product =  await Product.findById(req.params.id);
-        res.status(200).json(product)  
-
-    }
-    catch(err){ 
-        res.status(500).json(err)
-    }
-});
 
 // //GET ALL PRODUCTS
-router.get("/",async (req,res)=>{
+router.get("/", async (req, res) => {
     console.log("reached here")
     const queryNew = req.query.new;
     const queryCategory = req.query.category;
-    console.log(queryCategory,"qq")
+    console.log(queryCategory, "qq")
 
-    console.log(queryCategory,"categories");
-    try{
+    console.log(queryCategory, "categories");
+    try {
         let products;
-        if(queryNew){
-            products  = await Product.find().sort({createdAt:-1}).limit(1);
+        if (queryNew) {
+            products = await Product.find().sort({ createdAt: -1 }).limit(1);
         }
-        else if(queryCategory){
-            products = await Product.find({categories:{
-                $in:[queryCategory],
-            }});
+        else if (queryCategory) {
+            products = await Product.find({
+                categories: {
+                    $in: [queryCategory],
+                }
+            });
         }
-        else{
+        else {
             products = await Product.find();
         }
 
@@ -90,7 +93,7 @@ router.get("/",async (req,res)=>{
 
 
     }
-    catch(err){
+    catch (err) {
         res.status(500).json(err)
     }
 });

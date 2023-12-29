@@ -11,6 +11,10 @@ import { useLocation } from "react-router-dom";
 const Container = styled.div``;
 const Title = styled.h1`
     margin: 20px;
+    font-family: monospace;
+    font-size: 40px;
+
+
 `;
 const FilterContainer = styled.div`
     display: flex;
@@ -58,7 +62,7 @@ const ProductList = () => {
         <Container>
             <Navbar />
             <Announcement />
-            <Title>Dresses</Title>
+            <Title>{cat}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>

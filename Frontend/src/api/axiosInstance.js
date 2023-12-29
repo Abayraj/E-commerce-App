@@ -2,9 +2,14 @@
 
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000', // Your API base URL
+export const axiosInstance = axios.create({
+  baseURL: 'http://localhost:5000/api', // Your API base URL
   // Other configurations like headers, timeout, interceptors, etc.
 });
 
-export default axiosInstance;
+export const userRequest = axios.create({
+  baseURL:axiosInstance,
+  hearder:{token:"Bearer"}
+})
+
+
