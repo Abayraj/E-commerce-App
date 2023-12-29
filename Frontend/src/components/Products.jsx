@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Products = ({ cat, filters, sort }) => {
-  console.log(filters)
+    console.log(filters);
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     console.log(cat, "cat inside the product page");
@@ -28,8 +28,8 @@ const Products = ({ cat, filters, sort }) => {
         };
         getProduct();
     }, [cat]);
-    console.log(filteredProducts, "filterd product value  at ");
-    console.log(cat, filters, sort, "sort");
+    // console.log(filteredProducts, "filterd product value  at ");
+    // console.log(cat, filters, sort, "sort");
 
     useEffect(() => {
         cat &&
@@ -41,6 +41,25 @@ const Products = ({ cat, filters, sort }) => {
                 )
             );
     }, [products, cat, filters]);
+
+    useEffect(() => {
+        if (sort === "newest") {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.createdAt - b.createdAt)
+            );
+        } else if ((sort === "asc")) {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.price - b.price)
+            );
+           
+        } 
+        else{
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => b.price - a.price)
+            );
+          
+        } 
+    }, [sort]);
 
     return (
         <Container>
