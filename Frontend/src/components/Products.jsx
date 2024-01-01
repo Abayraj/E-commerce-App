@@ -21,9 +21,9 @@ const Products = ({ cat, filters, sort }) => {
         const getProduct = async () => {
             try {
                 const res = await axiosInstance.get(
-                    cat ? `/products?category=${cat}` : `/api/products`
+                    cat ? `/products?category=${cat}` : `/products`
                 );
-                console.log(res);
+        
                 setProducts(res.data);
             } catch (err) {}
         };
@@ -61,8 +61,10 @@ const Products = ({ cat, filters, sort }) => {
           
         } 
     }, [sort]);
+    console.log(products,"products")
 
     return (
+        
         <Container>
             {cat ? filteredProducts.map((item) => (
                 <Product item={item} key={item.id} />

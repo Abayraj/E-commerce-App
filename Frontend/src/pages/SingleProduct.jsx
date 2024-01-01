@@ -8,12 +8,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { axiosInstance } from "../api/axiosInstance";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
     padding: 50px;
     display: flex;
-    ${mobile({ padding:"10px", flexDirection:"column" })}
+    ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 const ImgContainer = styled.div`
     flex: 1;
@@ -22,17 +23,16 @@ const Image = styled.img`
     width: 500px;
     height: 600px;
     object-fit: cover;
-    ${mobile({ width:"45vh"})}
+    ${mobile({ width: "45vh" })}
 `;
-const Title = styled.h1`
-`;
+const Title = styled.h1``;
 const InfoContainer = styled.div`
     flex: 1;
-    ${mobile({padding:"10px" })}
+    ${mobile({ padding: "10px" })}
 `;
 const Description = styled.p`
     margin: 20px 0px;
-    font-family:monospace;
+    font-family: monospace;
     font-size: 18px;
 `;
 const Price = styled.span`
@@ -46,8 +46,7 @@ const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    ${mobile({ width:"100%" })}
-
+    ${mobile({ width: "100%" })}
 `;
 const Filter = styled.div`
     display: flex;
@@ -76,7 +75,7 @@ const AddContainter = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${mobile({ width:"100%" })}
+    ${mobile({ width: "100%" })}
 `;
 
 const AmountContainer = styled.div`
@@ -101,33 +100,30 @@ const Button = styled.button`
     border: 2px solid teal;
     cursor: pointer;
 
-    &:hover{
-        opacity:0.8;
+    &:hover {
+        opacity: 0.8;
     }
 `;
 
 const Product = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-    
-    const [product,setProduct] = useState({});
-    useEffect(()=>{
-        const getProduct = async () =>{
-            try{
-                const res = await axiosInstance.get("/products/find"+id);
+    console.log(id, "iddd");
+
+    const [product, setProduct] = useState({});
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await axiosInstance.get("/products/find/" + id);
+                console.log(res.data.color, "res data");
                 setProduct(res.data);
-        
+            } catch (err) {
+                console.log(err);
             }
-            catch(err){
-                
-            };
-          
-        }
+        };
         getProduct();
-        
-      
-    },[id])
-    console.log(product,"data")
+    }, [id]);
+
     return (
         <Container>
             <Navbar />
@@ -138,31 +134,23 @@ const Product = () => {
                 </ImgContainer>
                 <InfoContainer>
                     <Title>{product.title}</Title>
-                    <Description>
-                        A denim jumpsuit is a stylish and versatile one-piece
-                        garment typically made from denim fabric, which is a
-                        sturdy cotton twill textile known for its durability and
-                        casual appeal. The jumpsuit design combines a top and
-                        bottom into a single piece, usually featuring a fitted
-                        or cinched waist and a top portion resembling a shirt or
-                        a top with sleeves.
-                    </Description>
-                    <Price>$30</Price>
+                    <Description>{product.description}</Description>
+                    <Price>{product.price}</Price>
                     <FilterContainer>
                         <Filter>
                             <FilterTitle>color</FilterTitle>
-                            <FilterColor color="black" />
-                            <FilterColor color="darkblue" />
-                            <FilterColor color="gray" />
+                            {product.color &&
+                                product.color.map((c) => (
+                                    <FilterColor color={c} key={c} />
+                                ))}
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize>
-                                <FilterSizeOption>XS</FilterSizeOption>
-                                <FilterSizeOption>S</FilterSizeOption>
-                                <FilterSizeOption>M</FilterSizeOption>
-                                <FilterSizeOption>L</FilterSizeOption>
-                                <FilterSizeOption>XL</FilterSizeOption>
+                                {product.size &&
+                                    product.size.map((s) => (
+                                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                    ))}
                             </FilterSize>
                         </Filter>
                     </FilterContainer>
