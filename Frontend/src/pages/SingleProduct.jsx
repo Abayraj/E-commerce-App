@@ -9,6 +9,8 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api/axiosInstance";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -108,9 +110,12 @@ const Button = styled.button`
 const Product = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-    console.log(id, "iddd");
 
     const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [color,setColor] = useState('');
+    const [size,setSize] = useState('');
+    const dispatch = useDispatch();
     useEffect(() => {
         const getProduct = async () => {
             try {
@@ -124,6 +129,21 @@ const Product = () => {
         getProduct();
     }, [id]);
 
+    const handleQuantity = (type) => {
+        if (type === "dec") {
+          quantity > 1 && setQuantity(quantity - 1);
+        } else {
+            setQuantity(quantity + 1);
+        }
+    };
+
+    const handleClick = () =>{
+        //update cart
+        dispatch(addProduct({...product,quantity,color,size}));
+
+
+
+    };
     return (
         <Container>
             <Navbar />
@@ -139,28 +159,28 @@ const Product = () => {
                     <FilterContainer>
                         <Filter>
                             <FilterTitle>color</FilterTitle>
-                            {product.color &&
-                                product.color.map((c) => (
-                                    <FilterColor color={c} key={c} />
-                                ))}
+                            {product.color?.map((c) => (
+                                <FilterColor color={c} key={c} onClick={()=>setColor(c)}/>
+                            ))}
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
-                                {product.size &&
-                                    product.size.map((s) => (
-                                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                                    ))}
+                            <FilterSize onChange={(event)=>setSize(event.target.value)}>
+                                {product.size?.map((s) => (
+                                    <FilterSizeOption key={s}>
+                                        {s}
+                                    </FilterSizeOption>
+                                ))}
                             </FilterSize>
                         </Filter>
                     </FilterContainer>
                     <AddContainter>
                         <AmountContainer>
-                            <RemoveIcon />
-                            <Amount>1</Amount>
-                            <AddIcon />
+                            <RemoveIcon onClick={() => handleQuantity("dec")} />
+                            <Amount>{quantity}</Amount>
+                            <AddIcon onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button>ADD TO CART</Button>
+                        <Button onClick={handleClick}>ADD TO CART</Button>
                     </AddContainter>
                 </InfoContainer>
             </Wrapper>

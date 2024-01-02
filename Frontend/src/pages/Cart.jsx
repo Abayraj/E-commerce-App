@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 
@@ -152,6 +153,7 @@ const Summary = styled.div`
 `;
 
 const Cart = () => {
+    const cart = useSelector(state=>state.cart)
     return (
         <Container>
             <Navbar />
@@ -168,63 +170,37 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
+                       {cart.products.map((product )=>( <Product>
                             <ProductDetail>
                                 <Image src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
                                 <Details>
                                     <ProductName>
                                         <b>Product:</b>
-                                        JESSIE THUNDER SHOES
+                                        {product.title}
                                     </ProductName>
                                     <ProductId>
                                         <b>ID:</b>
-                                        9853434
+                                        {}
                                     </ProductId>
                                     <ProductColor color="black" />
                                     <ProductSize>
                                         <b>Size</b>
-                                        37.5
+                                       {product.size}
                                     </ProductSize>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
                                 <ProductAmountContainer>
                                     <AddIcon />
-                                    <ProductAmount>2</ProductAmount>
+                                    <ProductAmount>{product.quantity}</ProductAmount>
                                     <RemoveIcon />
                                 </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
+                                <ProductPrice>{product.price}</ProductPrice>
                             </PriceDetail>
                         </Product>
-                        <Hr />
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                <Details>
-                                    <ProductName>
-                                        <b>Product:</b>
-                                        JESSIE THUNDER SHOES
-                                    </ProductName>
-                                    <ProductId>
-                                        <b>ID:</b>
-                                        9853434
-                                    </ProductId>
-                                    <ProductColor color="black" />
-                                    <ProductSize>
-                                        <b>Size</b>
-                                        37.5
-                                    </ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <AddIcon />
-                                    <ProductAmount>2</ProductAmount>
-                                    <RemoveIcon />
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                        
+                        ))}
+                        <Hr/>
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARAY</SummaryTitle>
