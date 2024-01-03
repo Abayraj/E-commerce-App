@@ -154,6 +154,7 @@ const Summary = styled.div`
 
 const Cart = () => {
     const cart = useSelector(state=>state.cart)
+    console.log(cart)
     return (
         <Container>
             <Navbar />
@@ -170,13 +171,13 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                       {cart.products.map((product )=>( <Product>
+                       {cart.products?.map((product)=>( <Product>
                             <ProductDetail>
-                                <Image src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                                <Image src={product?.img} />
                                 <Details>
                                     <ProductName>
                                         <b>Product:</b>
-                                        {product.title}
+                                        {product?.title}
                                     </ProductName>
                                     <ProductId>
                                         <b>ID:</b>
@@ -185,17 +186,17 @@ const Cart = () => {
                                     <ProductColor color="black" />
                                     <ProductSize>
                                         <b>Size</b>
-                                       {product.size}
+                                       {product?.size}
                                     </ProductSize>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
                                 <ProductAmountContainer>
                                     <AddIcon />
-                                    <ProductAmount>{product.quantity}</ProductAmount>
+                                    <ProductAmount>{product?.quantity}</ProductAmount>
                                     <RemoveIcon />
                                 </ProductAmountContainer>
-                                <ProductPrice>{product.price}</ProductPrice>
+                                <ProductPrice>{product?.price}</ProductPrice>
                             </PriceDetail>
                         </Product>
                         
